@@ -16,7 +16,7 @@
       const btnRepos = document.getElementById("btnRepos");
       const divResult = document.getElementById("divResult");
       btnRepos.addEventListener("click", getRepos);
-      // debugger;
+    //   debugger;
       async function getRepos() {
         // gives the repos which have more than 100000 stars
         // : is the seperator of the parameter
@@ -25,7 +25,11 @@
         const response = await fetch(url);
         const result = await response.json();
         result.items.forEach(i => {
-          divResult.appendChild(document.createTextNode(i.full_name));
+
+        const anchor = document.createElement("a");
+        anchor.href=i.html_url;
+        anchor.textContent=i.full_name;
+          divResult.appendChild(anchor);
           divResult.appendChild(document.createElement("br"));
           
         });
