@@ -14,6 +14,7 @@
 
     <script>
       const btnRepos = document.getElementById("btnRepos");
+      const divResult = document.getElementById("divResult");
       btnRepos.addEventListener("click", getRepos);
       // debugger;
       async function getRepos() {
@@ -24,9 +25,10 @@
         const response = await fetch(url);
         const result = await response.json();
         result.items.forEach(i => {
-            console.log(i.full_name)
+          divResult.appendChild(document.createTextNode(i.full_name));
+          divResult.appendChild(document.createElement("br"));
+          
         });
-        console.log(result.items[0].full_name);
       }
     </script>
   </body>
