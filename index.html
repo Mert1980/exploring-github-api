@@ -70,7 +70,7 @@
         result.items.forEach(i => {
           const anchor = document.createElement("a");
           anchor.href = i.html_url;
-          anchor.textContent = i.title;
+          anchor.textContent = i.commit.message;
           divResult.appendChild(anchor);
           divResult.appendChild(document.createElement("br"));
         });
