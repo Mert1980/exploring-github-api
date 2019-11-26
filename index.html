@@ -23,7 +23,7 @@
 
       btnRepos.addEventListener("click", getRepos);
       btnIssues.addEventListener("click", getIssues);
-      btnCommits.addEventListener("click", getCommits);
+      btnCommits.addEventListener("click", e => getCommits());
 
       async function getRepos() {
         // gives the repos which has stars between the given range
@@ -55,10 +55,8 @@
           divResult.appendChild(document.createElement("br"));
         });
       }
-      async function getCommits() {
+      async function getCommits(url="https://api.github.com/search/commits?q=repo:freecodecamp/freecodecamp author-date:2019-03-01..2019-05-31"){
         clear();
-        const url =
-          "https://api.github.com/search/commits?q=repo:freecodecamp/freecodecamp author-date:2019-03-01..2019-03-31";
         const headers = {
           Accept: "application/vnd.github.cloak-preview"
         };
@@ -68,6 +66,12 @@
         });
         const link = response.headers.get("link");
         const links = link.split(",");
+        const urls = links.map(a=>{
+          return {
+            url:a.split(";")[0].replace(">","").replace("<",""),
+            title:a.split(";")[1]
+          }
+        })
         const result = await response.json();
         result.items.forEach(i => {
           const img = document.createElement("img");
@@ -81,9 +85,16 @@
           divResult.appendChild(anchor);
           divResult.appendChild(document.createElement("br"));
         });
+        urls.forEach(u => {
+          const btn = document.createElement("button");
+          btn.textContent = u.title;
+          btn.addEventListener("click", e => getCommits(u.url));
+          divResult.appendChild(btn);
+        })
       }
       function clear() {
-        while (divResult.firstChild) divResult.removeChild();
+        while(divResult.firstChild) 
+            divResult.removeChild(divResult.firstChild)
       }
     </script>
   </body>
