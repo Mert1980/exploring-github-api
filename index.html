@@ -10,6 +10,7 @@
     <h1>GitHub Tutorial</h1>
     <button id="btnRepos">Repos</button>
     <button id="btnIssues">Issues</button>
+    <button id="btnIssuesPublic">Issues Public</button>
     <button id="btnCommits">Commits</button>
 
     <div id="divResult"></div>
@@ -17,14 +18,17 @@
     <script>
       const btnRepos = document.getElementById("btnRepos");
       const btnIssues = document.getElementById("btnIssues");
+      const btnIssuesPublic = document.getElementById("btnIssuesPublic");
+
       const btnCommits = document.getElementById("btnCommits");
 
       const divResult = document.getElementById("divResult");
 
       btnRepos.addEventListener("click", getRepos);
       btnIssues.addEventListener("click", getIssues);
+      btnIssuesPublic.addEventListener("click", e => getIssuesPublic());
       btnCommits.addEventListener("click", e => getCommits());
-
+     
       async function getRepos() {
         // gives the repos which has stars between the given range
         // : is the seperator of the parameter
@@ -55,6 +59,34 @@
           divResult.appendChild(document.createElement("br"));
         });
       }
+      async function getIssuesPublic() {
+        clear();
+        // const username = "husseintest";
+        // const password = "hpf;hkh123";
+        // const headers = {
+        //   Authorization: `Basic ${btoa(`${username}:${password}`)}`
+        // };
+        
+        const headers = {
+            "Authorization" : `Token 2a2fb2247910fabe2af3959768e8c5cf2366aed5`
+        }
+        const url =
+          "https://api.github.com/search/issues?q=repo:HackYourFutureBelgium/class-6 type:issue";
+        const response = await fetch(url, {
+          method: "GET",
+          headers: headers
+        });
+        const result = await response.json();
+
+        result.items.forEach(i => {
+          const anchor = document.createElement("a");
+          anchor.href = i.html_url;
+          anchor.textContent = i.title;
+          divResult.appendChild(anchor);
+          divResult.appendChild(document.createElement("br"));
+        });
+      }
+
       async function getCommits(
         url = "https://api.github.com/search/commits?q=repo:freecodecamp/freecodecamp author-date:2019-03-01..2019-05-31"
       ) {
