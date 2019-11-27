@@ -51,7 +51,7 @@
           "https://api.github.com/repos/HackYourFutureBelgium/class-6/issues";
 
         const headers = {
-          Authorization: `Token c2c787a6f0befd1ceb8d39c30cf202c37cb2146c`
+          Authorization: `Token 21d65dbb705002775d5582fa388656040987f919`
         };
         const payLoad = {
           title: "Hey my brand new issue!!!"
@@ -88,10 +88,10 @@
       async function getIssuesPrivate() {
         clear();
         const headers = {
-          Authorization: `Token 2a2fb2247910fabe2af3959768e8c5cf2366aed5`
+          Authorization: `Token 21d65dbb705002775d5582fa388656040987f919`
         };
         const url =
-          "https://api.github.com/search/issues?q=repo:HackYourFutureBelgium/class-6 type:issue";
+          "https://api.github.com/search/issues?q=repo:HackYourFutureBelgium/private-repo type:issue";
         const response = await fetch(url, {
           method: "GET",
           headers: headers
