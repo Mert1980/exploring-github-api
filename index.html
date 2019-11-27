@@ -10,7 +10,7 @@
     <h1>GitHub Tutorial</h1>
     <button id="btnRepos">Repos</button>
     <button id="btnIssues">Issues</button>
-    <button id="btnIssuesPublic">Issues Public</button>
+    <button id="btnIssuesPrivate">Issues Public</button>
     <button id="btnCommits">Commits</button>
 
     <div id="divResult"></div>
@@ -18,7 +18,7 @@
     <script>
       const btnRepos = document.getElementById("btnRepos");
       const btnIssues = document.getElementById("btnIssues");
-      const btnIssuesPublic = document.getElementById("btnIssuesPublic");
+      const btnIssuesPrivate = document.getElementById("btnIssuesPrivate");
 
       const btnCommits = document.getElementById("btnCommits");
 
@@ -26,7 +26,7 @@
 
       btnRepos.addEventListener("click", getRepos);
       btnIssues.addEventListener("click", getIssues);
-      btnIssuesPublic.addEventListener("click", e => getIssuesPublic());
+      btnIssuesPrivate.addEventListener("click", e => getIssuesPrivate());
       btnCommits.addEventListener("click", e => getCommits());
      
       async function getRepos() {
@@ -59,7 +59,7 @@
           divResult.appendChild(document.createElement("br"));
         });
       }
-      async function getIssuesPublic() {
+      async function getIssuesPrivate() {
         clear();
         // const username = "husseintest";
         // const password = "hpf;hkh123";
