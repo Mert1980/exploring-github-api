@@ -8,11 +8,12 @@
   </head>
   <body>
     <h1>GitHub Tutorial</h1>
-    <h2>HackYourFutureBelgium-Class6 GitHub Repo</h2>
+    <h2>HackYourFutureBelgium-Class6</h2>
     <button id="btnRepos">Repos</button>
     <button id="btnIssues">Issues</button>
     <button id="btnIssuesPrivate">Issues Private</button>
     <button id="btnCommits">Commits</button>
+    <button id = 'btnCreateIssue'>Create Issue</button>
 
     <div id="divResult"></div>
 
@@ -20,11 +21,13 @@
       const btnRepos = document.getElementById("btnRepos");
       const btnIssues = document.getElementById("btnIssues");
       const btnIssuesPrivate = document.getElementById("btnIssuesPrivate");
+      const btnCreateIssue = document.getElementById("btnCreateIssue")
       const btnCommits = document.getElementById("btnCommits");
       const divResult = document.getElementById("divResult");
       btnRepos.addEventListener("click", getRepos);
       btnIssues.addEventListener("click", getIssues);
       btnIssuesPrivate.addEventListener("click", e => getIssuesPrivate());
+      btnCreateIssue.addEventListener("click", e=> createIssues())
       btnCommits.addEventListener("click", e => getCommits());
       async function getRepos() {
         // gives the repos which has stars between the given range
@@ -41,6 +44,32 @@
           divResult.appendChild(anchor);
           divResult.appendChild(document.createElement("br"));
         });
+      }
+      async function createIssues() {
+        clear();
+        const url =
+          "https://api.github.com/repos/HackYourFutureBelgium/class-6/issues";
+
+        const headers = {
+          Authorization: `Token c2c787a6f0befd1ceb8d39c30cf202c37cb2146c`
+        };
+        const payLoad = {
+          title: "Hey my brand new issue!!!"
+        };
+        const response = await fetch(url, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(payLoad)
+        });
+        const result = await response.json();
+
+        const i = result;
+
+        const anchor = document.createElement("a");
+        anchor.href = i.html_url;
+        anchor.textContent = i.title;
+        divResult.appendChild(anchor);
+        divResult.appendChild(document.createElement("br"));
       }
       async function getIssues() {
         clear();
