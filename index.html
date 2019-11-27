@@ -20,16 +20,12 @@
       const btnRepos = document.getElementById("btnRepos");
       const btnIssues = document.getElementById("btnIssues");
       const btnIssuesPrivate = document.getElementById("btnIssuesPrivate");
-
       const btnCommits = document.getElementById("btnCommits");
-
       const divResult = document.getElementById("divResult");
-
       btnRepos.addEventListener("click", getRepos);
       btnIssues.addEventListener("click", getIssues);
       btnIssuesPrivate.addEventListener("click", e => getIssuesPrivate());
       btnCommits.addEventListener("click", e => getCommits());
-
       async function getRepos() {
         // gives the repos which has stars between the given range
         // : is the seperator of the parameter
@@ -72,7 +68,6 @@
           headers: headers
         });
         const result = await response.json();
-
         result.items.forEach(i => {
           const anchor = document.createElement("a");
           anchor.href = i.html_url;
