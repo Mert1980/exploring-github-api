@@ -24,13 +24,11 @@
       const btnCreateIssue = document.getElementById("btnCreateIssue")
       const btnCommits = document.getElementById("btnCommits");
       const divResult = document.getElementById("divResult");
-
       btnRepos.addEventListener("click", getRepos);
       btnIssues.addEventListener("click", getIssues);
       btnIssuesPrivate.addEventListener("click", e => getIssuesPrivate());
       btnCreateIssue.addEventListener("click", e=> createIssues())
       btnCommits.addEventListener("click", e => getCommits());
-
       async function getRepos() {
         // gives the repos which has stars between the given range
         // : is the seperator of the parameter
@@ -108,8 +106,7 @@
         });
       }
       async function getCommits(
-        url = "https://api.github.com/search/commits?q=repo:HackYourFutureBelgium/class-6 author-date:2019-09-15..2019-11-26"
-      ) {
+        url = "https://api.github.com/search/commits?q=repo:HackYourFutureBelgium/class-6 author-date:2019-09-15..2019-11-26"){
         clear();
         const headers = {
           Accept: "application/vnd.github.cloak-preview"
